@@ -1,13 +1,26 @@
 const express = require("express");
 const session = require("express-session");
+const MemoryStore = require('memorystore')(session);
+const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 const app = express();
 
-// Get port from environment variable (Railway provides this)
+// ========== CRITICAL FOR RENDER ==========
+app.set('trust proxy', 1); // Trust first proxy for HTTPS
+
+// ========== CORS CONFIGURATION ==========
+app.use(cors({
+    origin: ['https://bangaloreconnect-project.onrender.com', 'https://bangalorconnect.online', 'http://localhost:3000'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
+}));
+
+// Get port from environment variable (Render provides this)
 const PORT = process.env.PORT || 3000;
 
-// For Railway's file system (persistent storage)
+// For Render's file system (persistent storage)
 const DATA_FILE = process.env.DATA_FILE || path.join(__dirname, 'data', 'jobs.json');
 
 // Ensure data directory exists
@@ -17,7 +30,7 @@ if (!fs.existsSync(dataDir)) {
   console.log(`📁 Created data directory: ${dataDir}`);
 }
 
-// Admin credentials (for Railway, consider using env vars)
+// Admin credentials (use environment variables for security)
 const ADMIN_USER = process.env.ADMIN_USER || "Ruhan@0312";
 const ADMIN_PASS = process.env.ADMIN_PASS || "Ruhan@0312";
 
@@ -100,27 +113,34 @@ const SEO_DATA = {
   }
 };
 
+// ========== SESSION CONFIGURATION FOR RENDER ==========
+app.use(session({
+    store: new MemoryStore({
+        checkPeriod: 86400000 // Cleanup expired sessions every 24h
+    }),
+    secret: process.env.SESSION_SECRET || 'bangalore-connect-secret-key-change-in-production',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: true, // REQUIRED for HTTPS on Render
+        httpOnly: true,
+        sameSite: 'none', // Required for cross-site cookies
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+        domain: '.onrender.com' // Allow subdomains
+    },
+    name: 'bangaloreconnect.sid' // Custom session cookie name
+}));
+
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-  secret: process.env.SESSION_SECRET || "bangalore-connect-secret-key-" + Math.random().toString(36).substring(2),
-  resave: false,
-  saveUninitialized: false,
-  cookie: { 
-    maxAge: 60 * 60 * 1000, // 1 hour
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax'
-  }
-}));
 
 // View engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Load jobs with Railway compatibility
+// ========== LOAD AND SAVE JOBS FUNCTIONS ==========
 let jobs = [];
 function loadJobs() {
   try {
@@ -140,14 +160,11 @@ function loadJobs() {
     }
   } catch (error) {
     console.error("❌ Error loading jobs:", error.message);
-    console.error("Full error:", error);
     jobs = [];
-    // Create fresh file if corrupted
     saveJobs();
   }
 }
 
-// Save jobs function
 function saveJobs() {
   try {
     const data = JSON.stringify(jobs, null, 2);
@@ -160,7 +177,6 @@ function saveJobs() {
   }
 }
 
-// Initial load
 loadJobs();
 
 // Helper function to format job description with line breaks
@@ -169,28 +185,53 @@ function formatJobDescription(description) {
   return description.replace(/\n/g, '<br>');
 }
 
-// Auth middleware
+// ========== AUTHENTICATION MIDDLEWARE ==========
 function requireAuth(req, res, next) {
-  if (req.session.isAdmin && req.session.lastActivity && 
-      (Date.now() - req.session.lastActivity) < 60 * 60 * 1000) {
-    req.session.lastActivity = Date.now();
-    return next();
-  }
-  req.session.destroy();
-  res.redirect("/admin?redirect=" + encodeURIComponent(req.originalUrl));
+    // Debug session
+    console.log('Session check:', {
+        sessionID: req.sessionID,
+        loggedIn: req.session.loggedIn,
+        userId: req.session.userId,
+        session: req.session
+    });
+    
+    if (req.session && req.session.userId && req.session.loggedIn) {
+        console.log('✅ User authenticated:', req.session.userId);
+        req.session.lastActivity = Date.now();
+        return next();
+    }
+    console.log('❌ Authentication required');
+    res.redirect("/admin?redirect=" + encodeURIComponent(req.originalUrl));
 }
 
 // ==================== ROUTES ====================
 
-// HEALTH CHECK (Important for Railway)
+// HEALTH CHECK (Important for Render)
 app.get("/health", (req, res) => {
   res.status(200).json({ 
     status: "OK", 
     timestamp: new Date().toISOString(),
     jobsCount: jobs.length,
     uptime: process.uptime(),
-    memory: process.memoryUsage()
+    memory: process.memoryUsage(),
+    session: {
+        id: req.sessionID,
+        authenticated: !!req.session.loggedIn
+    }
   });
+});
+
+// SESSION CHECK ENDPOINT
+app.get("/api/session/check", (req, res) => {
+    res.json({
+        authenticated: !!req.session.loggedIn,
+        user: req.session.loggedIn ? {
+            id: req.session.userId,
+            username: req.session.username,
+            isAdmin: req.session.isAdmin
+        } : null,
+        sessionId: req.sessionID
+    });
 });
 
 // HOME PAGE
@@ -373,9 +414,8 @@ app.get("/job/:id", (req, res) => {
 
 // ==================== ADMIN ROUTES ====================
 
-// ADMIN LOGIN
+// ADMIN LOGIN PAGE
 app.get("/admin", (req, res) => {
-  req.session.destroy();
   const error = req.query.error || null;
   const redirect = req.query.redirect || '/dashboard';
   const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bangalorconnect.online' : `http://localhost:${PORT}`;
@@ -390,6 +430,7 @@ app.get("/admin", (req, res) => {
   });
 });
 
+// ADMIN LOGIN SUBMIT (UPDATED FOR RENDER)
 app.post("/admin", (req, res) => {
   const { username, password, redirect } = req.body;
   
@@ -405,12 +446,34 @@ app.post("/admin", (req, res) => {
     }
     
     if (username === ADMIN_USER && password === ADMIN_PASS) {
+      // Set session data
+      req.session.userId = 1;
+      req.session.username = username;
       req.session.isAdmin = true;
+      req.session.loggedIn = true;
+      req.session.loginTime = new Date();
       req.session.lastActivity = Date.now();
-      req.session.cookie.expires = new Date(Date.now() + 60 * 60 * 1000);
       
-      return res.redirect(redirect || "/dashboard");
+      // Save session
+      req.session.save((saveErr) => {
+        if (saveErr) {
+          console.error("Session save error:", saveErr);
+          return res.render("admin-login", { 
+            error: "Session error. Please try again.",
+            redirect: redirect || '/dashboard',
+            contactEmail: "bangalore.connect1@gmail.com",
+            title: SEO_DATA.adminLogin.title
+          });
+        }
+        
+        console.log('✅ Login successful for:', username);
+        console.log('Session after login:', req.session);
+        
+        // Redirect to dashboard
+        return res.redirect(redirect || "/dashboard");
+      });
     } else {
+      console.log('❌ Login failed for:', username);
       res.render("admin-login", { 
         error: "Invalid username or password",
         redirect: redirect || '/dashboard',
@@ -421,12 +484,69 @@ app.post("/admin", (req, res) => {
   });
 });
 
+// API LOGIN ENDPOINT (for AJAX)
+app.post("/api/admin/login", (req, res) => {
+  const { username, password } = req.body;
+  
+  if (username === ADMIN_USER && password === ADMIN_PASS) {
+    req.session.regenerate((err) => {
+      if (err) {
+        console.error("Session regeneration error:", err);
+        return res.status(500).json({ success: false, error: "Session error" });
+      }
+      
+      req.session.userId = 1;
+      req.session.username = username;
+      req.session.isAdmin = true;
+      req.session.loggedIn = true;
+      req.session.loginTime = new Date();
+      req.session.lastActivity = Date.now();
+      
+      req.session.save((saveErr) => {
+        if (saveErr) {
+          console.error("Session save error:", saveErr);
+          return res.status(500).json({ success: false, error: "Session save error" });
+        }
+        
+        console.log('✅ API Login successful for:', username);
+        res.json({
+          success: true,
+          message: "Login successful",
+          user: { username, isAdmin: true },
+          redirect: "/dashboard"
+        });
+      });
+    });
+  } else {
+    res.status(401).json({
+      success: false,
+      error: "Invalid credentials"
+    });
+  }
+});
+
 // LOGOUT
 app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) console.error('Session destruction error:', err);
-    res.clearCookie('connect.sid');
+    res.clearCookie('bangaloreconnect.sid');
     res.redirect("/");
+  });
+});
+
+// API LOGOUT
+app.post("/api/admin/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Logout error:', err);
+      return res.status(500).json({ error: 'Logout failed' });
+    }
+    
+    res.clearCookie('bangaloreconnect.sid', {
+      path: '/'
+    });
+    
+    res.json({ success: true, message: 'Logged out successfully' });
   });
 });
 
@@ -455,7 +575,8 @@ app.get("/dashboard", requireAuth, (req, res) => {
     error: error,
     title: SEO_DATA.dashboard.title,
     description: SEO_DATA.dashboard.description,
-    canonicalUrl: `${baseUrl}/dashboard`
+    canonicalUrl: `${baseUrl}/dashboard`,
+    sessionUser: req.session.username
   });
 });
 
@@ -469,7 +590,8 @@ app.get("/post-job", requireAuth, (req, res) => {
     contactEmail: "bangalore.connect1@gmail.com",
     title: SEO_DATA.postJob.title,
     description: SEO_DATA.postJob.description,
-    canonicalUrl: `${baseUrl}/post-job`
+    canonicalUrl: `${baseUrl}/post-job`,
+    sessionUser: req.session.username
   });
 });
 
@@ -512,49 +634,24 @@ app.post("/post-job", requireAuth, (req, res) => {
   }
 });
 
-// DELETE JOB - ROBUST VERSION
+// DELETE JOB
 app.get("/delete-job/:id", requireAuth, (req, res) => {
   try {
     const jobId = req.params.id;
-    console.log(`=== DELETE REQUEST ===`);
-    console.log(`Job ID from URL: ${jobId} (Type: ${typeof jobId})`);
-    console.log(`Total jobs in memory: ${jobs.length}`);
-    
-    // Find job index using multiple comparison methods
-    let jobIndex = -1;
-    
-    // Try different comparison methods
-    jobIndex = jobs.findIndex(job => 
-      job.id == jobId || 
-      job.id.toString() === jobId.toString() ||
-      Number(job.id) === Number(jobId)
-    );
+    const jobIndex = jobs.findIndex(job => job.id == jobId);
     
     if (jobIndex !== -1) {
       const jobTitle = jobs[jobIndex].role;
-      console.log(`Found job: "${jobTitle}" at index ${jobIndex}`);
-      
-      // Remove job from array
       const deletedJob = jobs.splice(jobIndex, 1)[0];
       
-      // Save to file
       if (saveJobs()) {
-        console.log(`✓ Job deleted: "${jobTitle}"`);
-        console.log(`Remaining jobs: ${jobs.length}`);
-        
         const successMessage = encodeURIComponent(`Job "${jobTitle}" deleted successfully`);
         res.redirect(`/dashboard?success=${successMessage}`);
       } else {
-        // Restore job if save failed
         jobs.splice(jobIndex, 0, deletedJob);
         throw new Error("Failed to save changes to database");
       }
     } else {
-      console.log(`✗ Job not found with ID: ${jobId}`);
-      
-      // Log all available IDs for debugging
-      console.log("Available job IDs:", jobs.map(j => j.id));
-      
       res.redirect("/dashboard?error=" + encodeURIComponent(`Job not found with ID: ${jobId}`));
     }
   } catch (error) {
@@ -594,7 +691,7 @@ resourcePages.forEach(page => {
 
 // ==================== SEO PAGES ====================
 
-// SITEMAP.XML (For SEO)
+// SITEMAP.XML
 app.get("/sitemap.xml", (req, res) => {
   const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bangalorconnect.online' : `http://localhost:${PORT}`;
   
@@ -639,7 +736,7 @@ app.get("/sitemap.xml", (req, res) => {
   res.send(sitemap);
 });
 
-// ROBOTS.TXT (For SEO)
+// ROBOTS.TXT
 app.get("/robots.txt", (req, res) => {
   const baseUrl = process.env.NODE_ENV === 'production' ? 'https://bangalorconnect.online' : `http://localhost:${PORT}`;
   
@@ -689,11 +786,9 @@ app.use((err, req, res, next) => {
 
 // ==================== CREATE REQUIRED SEO FILES ====================
 
-// Create required files for SEO
 function createSEOFiles() {
   const publicDir = path.join(__dirname, 'public');
   
-  // Create robots.txt if doesn't exist
   const robotsPath = path.join(publicDir, 'robots.txt');
   if (!fs.existsSync(robotsPath)) {
     const robotsContent = `User-agent: *
@@ -708,10 +803,8 @@ Sitemap: https://bangalorconnect.online/sitemap.xml`;
     console.log('📝 Created robots.txt');
   }
   
-  // Create favicon placeholder
   const faviconPath = path.join(publicDir, 'favicon.ico');
   if (!fs.existsSync(faviconPath)) {
-    // Create a simple favicon (you should replace with real one)
     fs.writeFileSync(faviconPath, '');
     console.log('🎨 Created favicon.ico placeholder');
   }
@@ -719,7 +812,6 @@ Sitemap: https://bangalorconnect.online/sitemap.xml`;
 
 // ==================== SERVER START ====================
 
-// Create SEO files on startup
 createSEOFiles();
 
 app.listen(PORT, () => {
@@ -728,19 +820,15 @@ app.listen(PORT, () => {
   console.log(`🔐 Admin: http://localhost:${PORT}/admin`);
   console.log(`❤️  Health check: http://localhost:${PORT}/health`);
   console.log(`🗺️  Sitemap: http://localhost:${PORT}/sitemap.xml`);
-  console.log(`🤖 Robots: http://localhost:${PORT}/robots.txt`);
   console.log(`📊 Total jobs loaded: ${jobs.length}`);
-  console.log(`💾 Data file: ${DATA_FILE}`);
   console.log(`⚡ Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔒 Session store: MemoryStore`);
+  console.log(`🍪 Cookie name: bangaloreconnect.sid`);
+  console.log(`🔗 CORS enabled for: bangaloreconnect-project.onrender.com, bangalorconnect.online`);
   
   // Log admin credentials in development only
   if (process.env.NODE_ENV !== 'production') {
     console.log(`👤 Admin username: ${ADMIN_USER}`);
     console.log(`🔑 Admin password: ${ADMIN_PASS}`);
   }
-  
-  // SEO Status
-  console.log(`🔍 SEO Status: Enabled`);
-  console.log(`🌍 Sitemap: Ready (${jobs.length} job URLs)`);
-  console.log(`📈 Structured Data: Enabled for all jobs`);
 });
