@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Bangalore Connect</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Error Page Specific Styles */
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 2rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .error-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(239, 68, 68, 0.1);
+        }
+        
+        .error-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ef4444, #f59e0b);
+        }
+        
+        .error-icon {
+            font-size: 4.5rem;
+            color: #ef4444;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        
+        .error-subtitle {
+            font-size: 1.25rem;
+            color: #ef4444;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .error-message {
+            color: #475569;
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .error-details {
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            border: 1px solid #fecaca;
+        }
+        
+        .error-details summary {
+            font-weight: 600;
+            color: #dc2626;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .error-details pre {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-error {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            min-width: 160px;
+        }
+        
+        .btn-error-primary {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+        
+        .btn-error-primary:hover {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+        }
+        
+        .btn-error-secondary {
+            background: #f8fafc;
+            color: #475569;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .btn-error-secondary:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .error-footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+        
+        .error-footer a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .error-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-tips {
+            background: #dbeafe;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+        
+        .error-tips h4 {
+            color: #1d4ed8;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .error-tips ul {
+            margin: 0;
+            padding-left: 1.5rem;
+            color: #475569;
+        }
+        
+        .error-tips li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .error-shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .error-card {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-message {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+            }
+            
+            .btn-error {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .error-page {
+                padding: 1rem;
+            }
+            
+            .error-card {
+                padding: 1.5rem;
+            }
+            
+            .error-icon {
+                font-size: 3.5rem;
+            }
+            
+            .error-title {
+                font-size: 1.75rem;
+            }
+            
+            .error-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-page">
+        <div class="error-card">
+            <div class="error-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            
+            <h1 class="error-title">Oops! Something went wrong</h1>
+            
+            <div class="error-subtitle">
+                <i class="fas fa-bug"></i> Server Error
+            </div>
+            
+            <div class="error-message">
+                <%= message || "We encountered an unexpected error. Our team has been notified and is working to fix it." %>
+            </div>
+            
+            <% if (error && process.env.NODE_ENV !== 'production') { %>
+            <details class="error-details">
+                <summary>
+                    <i class="fas fa-code"></i> Technical Details (Development Only)
+                </summary>
+                <pre><%= error.stack || JSON.stringify(error, null, 2) %></pre>
+            </details>
+            <% } %>
+            
+            <div class="error-actions">
+                <a href="/" class="btn-error btn-error-primary">
+                    <i class="fas fa-home"></i> Go to Homepage
+                </a>
+                <button onclick="location.reload()" class="btn-error btn-error-secondary">
+                    <i class="fas fa-sync-alt"></i> Reload Page
+                </button>
+            </div>
+            
+            <div class="error-tips">
+                <h4><i class="fas fa-lightbulb"></i> What you can try:</h4>
+                <ul>
+                    <li>Refresh the page and try again</li>
+                    <li>Check your internet connection</li>
+                    <li>Clear your browser cache</li>
+                    <li>Try again in a few minutes</li>
+                </ul>
+            </div>
+            
+            <div class="error-footer">
+                <p>
+                    Still having issues? 
+                    <a href="mailto:bangalore.connect1@gmail.com?subject=Error%20Report">Contact our support team</a>
+                </p>
+                <p style="margin-top: 0.75rem; font-size: 0.75rem; opacity: 0.7;">
+                    <i class="fas fa-clock"></i> <%= new Date().toLocaleString() %> • 
+                    <i class="fas fa-server"></i> Bangalore Connect Portal v2.0
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add shake animation to error icon
+            const icon = document.querySelector('.error-icon');
+            setInterval(() => {
+                icon.classList.add('error-shake');
+                setTimeout(() => {
+                    icon.classList.remove('error-shake');
+                }, 500);
+            }, 5000);
+            
+            // Add click effects to buttons
+            const buttons = document.querySelectorAll('.btn-error');
+            buttons.forEach(btn => {
+                btn.addEventListener('mousedown', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                btn.addEventListener('mouseup', function() {
+                    this.style.transform = '';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+            
+            // Auto-hide technical details on production
+            if (window.location.hostname !== 'localhost') {
+                const details = document.querySelector('.error-details');
+                if (details) {
+                    details.style.display = 'none';
+                }
+            }
+            
+            // Add error reporting
+            const reportBtn = document.createElement('button');
+            reportBtn.innerHTML = '<i class="fas fa-flag"></i> Report Issue';
+            reportBtn.className = 'btn-error btn-error-secondary';
+            reportBtn.style.marginTop = '10px';
+            reportBtn.onclick = function() {
+                const errorMsg = encodeURIComponent('<%= message %>');
+                const url = encodeURIComponent(window.location.href);
+                window.open(`mailto:bangalore.connect1@gmail.com?subject=Error%20Report&body=Error:%20${errorMsg}%0AURL:%20${url}`, '_blank');
+            };
+            
+            const actionsDiv = document.querySelector('.error-actions');
+            if (actionsDiv) {
+                actionsDiv.appendChild(reportBtn);
+            }
+        });
+    </script>
+</body>
+</html>

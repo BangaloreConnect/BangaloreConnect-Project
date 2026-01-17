@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Bangalore Connect</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <style>
+        .login-card {
+            max-width: 380px;
+            padding: 2.5rem;
+        }
+        
+        .security-notice {
+            background: #fee2e2;
+            border: 1px solid #f87171;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 1.5rem 0;
+            font-size: 13px;
+            color: #dc2626;
+            text-align: center;
+        }
+        
+        .security-notice i {
+            color: #ef4444;
+        }
+        
+        .timer-display {
+            background: #1e293b;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body class="login-page">
+    <div class="login-card">
+        <div class="login-header">
+            <a href="/" class="logo" style="justify-content: center; margin-bottom: 1rem;">
+                <div class="logo-icon" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="logo-text">
+                    <h1 style="color: var(--darker); font-size: 22px;">Bangalore Connect</h1>
+                    <span style="color: var(--gray);">Secure Admin Portal</span>
+                </div>
+            </a>
+            <h2 style="font-size: 1.5rem;">Admin Login</h2>
+            <p>Access the job portal administration panel</p>
+        </div>
+
+        <!-- Security Notice -->
+        <div class="security-notice">
+            <i class="fas fa-shield-alt"></i>
+            <strong>MAXIMUM SECURITY:</strong> Session expires in 1 MINUTE
+            <div class="timer-display">
+                <i class="fas fa-clock"></i>
+                <span id="sessionTimer">01:00</span>
+            </div>
+        </div>
+
+        <% if (error) { %>
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i> <%= error %>
+            </div>
+        <% } %>
+
+        <form action="/admin" method="POST">
+            <input type="hidden" name="redirect" value="<%= redirect || '/dashboard' %>">
+            
+            <div class="form-group">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" 
+                       placeholder="Enter admin username" required autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" 
+                       placeholder="Enter admin password" required autocomplete="off">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; margin-top: 1rem;">
+                <i class="fas fa-sign-in-alt"></i> Secure Login
+            </button>
+        </form>
+        
+        <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+            <a href="/" class="btn btn-outline" style="width: 100%; border-color: var(--gray-light); color: var(--gray); padding: 10px;">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+        
+        <div style="text-align: center; margin-top: 1.5rem; font-size: 12px; color: var(--gray);">
+            <i class="fas fa-stopwatch"></i> Session will expire after 1 minute of inactivity
+        </div>
+    </div>
+
+    <script>
+        // Countdown timer for session
+        let timeLeft = 60; // 1 minute in seconds
+        
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('sessionTimer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            }
+        }
+        
+        // Start timer when page loads
+        document.addEventListener('DOMContentLoaded', updateTimer);
+    </script>
+</body>
+</html>

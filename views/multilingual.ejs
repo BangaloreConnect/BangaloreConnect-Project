@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual Support - Bangalore Connect</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <style>
+        .language-hero {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .language-flags {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .flag-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .flag-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .flag-icon.active {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: 3px solid #3b82f6;
+        }
+        
+        .translation-box {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .translation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .translation-text {
+            min-height: 150px;
+            padding: 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            margin: 1rem 0;
+            line-height: 1.8;
+        }
+        
+        .translation-controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .translate-btn {
+            padding: 10px 24px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .language-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .language-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .language-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .language-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        @media (max-width: 768px) {
+            .language-hero {
+                padding: 2rem 1rem;
+            }
+            
+            .language-flags {
+                gap: 1rem;
+            }
+            
+            .flag-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Multilingual Support</h1>
+                        <span>Bangalore Connect Resources</span>
+                    </div>
+                </a>
+                <div class="header-actions">
+                    <a href="https://chat.whatsapp.com/KhTXl9CNMbSG8mv6nYCAAW" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-whatsapp"></i> Join Community
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="resource-container">
+            <!-- Header -->
+            <div class="resource-header">
+                <h1>Multilingual Career Support</h1>
+                <p>Access job resources and career guidance in multiple Indian languages. Breaking language barriers for better opportunities.</p>
+            </div>
+
+            <!-- Language Hero -->
+            <div class="language-hero">
+                <h2 style="color: white; margin-bottom: 1rem; font-size: 2rem;">Speak Your Language, Grow Your Career</h2>
+                <p style="color: rgba(255, 255, 255, 0.9); max-width: 700px; margin: 0 auto;">We support Hindi, Kannada, Tamil, Telugu, and English to help job seekers from all backgrounds.</p>
+                
+                <div class="language-flags">
+                    <div class="flag-icon" onclick="selectLanguage('en')" title="English">
+                        🇺🇸
+                    </div>
+                    <div class="flag-icon active" onclick="selectLanguage('hi')" title="Hindi">
+                        🇮🇳
+                    </div>
+                    <div class="flag-icon" onclick="selectLanguage('kn')" title="Kannada">
+                        🏴󠁫󠁮󠁿
+                    </div>
+                    <div class="flag-icon" onclick="selectLanguage('ta')" title="Tamil">
+                        🇮🇳
+                    </div>
+                    <div class="flag-icon" onclick="selectLanguage('te')" title="Telugu">
+                        🇮🇳
+                    </div>
+                </div>
+            </div>
+
+            <!-- Translation Demo -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-language"></i> Live Translation Demo
+                </h2>
+                
+                <div class="translation-box">
+                    <div class="translation-header">
+                        <div>
+                            <h3 style="margin: 0;">Job Description Translation</h3>
+                            <p style="color: #64748b; margin: 0.25rem 0 0;">Translate any job description to your preferred language</p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span>English →</span>
+                            <select id="targetLanguage" style="padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                                <option value="hi">Hindi</option>
+                                <option value="kn">Kannada</option>
+                                <option value="ta">Tamil</option>
+                                <option value="te">Telugu</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Original English Text:</label>
+                        <div class="translation-text" id="originalText">
+                            We are looking for a talented Software Engineer with 3+ years of experience in full-stack development. The ideal candidate should have strong skills in React.js, Node.js, and MongoDB. You will be responsible for designing, developing, and maintaining scalable web applications. This position offers competitive salary, health insurance, flexible working hours, and opportunities for career growth.
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Translated Text:</label>
+                        <div class="translation-text" id="translatedText" style="background: #f8fafc;">
+                            <!-- Translation will appear here -->
+                        </div>
+                    </div>
+                    
+                    <div class="translation-controls">
+                        <button onclick="translateText()" class="translate-btn">
+                            <i class="fas fa-exchange-alt"></i> Translate Now
+                        </button>
+                        <button onclick="speakText()" class="translate-btn" style="background: #10b981;">
+                            <i class="fas fa-volume-up"></i> Listen
+                        </button>
+                        <button onclick="copyTranslation()" class="translate-btn" style="background: #64748b;">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Language Resources -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-book"></i> Language-Specific Resources
+                </h2>
+                
+                <div class="language-cards">
+                    <div class="language-card">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                            <div style="font-size: 2rem;">🇮🇳</div>
+                            <div>
+                                <h3 style="margin: 0;">Hindi Resources</h3>
+                                <p style="color: #64748b; margin: 0; font-size: 0.9rem;">हिंदी में करियर मार्गदर्शन</p>
+                            </div>
+                        </div>
+                        <ul style="padding-left: 1.2rem; color: #475569;">
+                            <li>रिज्यूमे बनाने की पूरी गाइड</li>
+                            <li>इंटरव्यू तैयारी टिप्स</li>
+                            <li>सैलरी नेगोशिएशन गाइड</li>
+                            <li>टेक्निकल सीखने के रिसोर्सेज</li>
+                        </ul>
+                        <div class="language-stats">
+                            <span style="color: #64748b;">Users: 45%</span>
+                            <button style="padding: 6px 12px; background: #f1f5f9; border: none; border-radius: 4px; cursor: pointer;">
+                                Access Resources
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="language-card">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                            <div style="font-size: 2rem;">🏴󠁫󠁮󠁿</div>
+                            <div>
+                                <h3 style="margin: 0;">Kannada Resources</h3>
+                                <p style="color: #64748b; margin: 0; font-size: 0.9rem;">ಕನ್ನಡದಲ್ಲಿ ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ</p>
+                            </div>
+                        </div>
+                        <ul style="padding-left: 1.2rem; color: #475569;">
+                            <li>ರೆಸ್ಯೂಮ್ ತಯಾರಿಕೆ ಮಾರ್ಗದರ್ಶಿ</li>
+                            <li>ಸಂದರ್ಶನ ಸಿದ್ಧತೆ ಸಲಹೆಗಳು</li>
+                            <li>ಸಂಬಳ ಚರ್ಚೆ ಮಾರ್ಗದರ್ಶಿ</li>
+                            <li>ತಂತ್ರಜ್ಞಾನ ಕಲಿಕೆ ಸಂಪನ್ಮೂಲಗಳು</li>
+                        </ul>
+                        <div class="language-stats">
+                            <span style="color: #64748b;">Users: 25%</span>
+                            <button style="padding: 6px 12px; background: #f1f5f9; border: none; border-radius: 4px; cursor: pointer;">
+                                Access Resources
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="language-card">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                            <div style="font-size: 2rem;">🇮🇳</div>
+                            <div>
+                                <h3 style="margin: 0;">Tamil Resources</h3>
+                                <p style="color: #64748b; margin: 0; font-size: 0.9rem;">தமிழில் தொழில் வழிகாட்டுதல்</p>
+                            </div>
+                        </div>
+                        <ul style="padding-left: 1.2rem; color: #475569;">
+                            <li>ரெசூமே தயாரிப்பு வழிகாட்டி</li>
+                            <li>நேர்காணல் தயாரிப்பு உதவிக்குறிப்புகள்</li>
+                            <li>சம்பள பேரச்சு வழிகாட்டி</li>
+                            <li>தொழில்நுட்பக் கற்றல் வளங்கள்</li>
+                        </ul>
+                        <div class="language-stats">
+                            <span style="color: #64748b;">Users: 15%</span>
+                            <button style="padding: 6px 12px; background: #f1f5f9; border: none; border-radius: 4px; cursor: pointer;">
+                                Access Resources
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="language-card">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                            <div style="font-size: 2rem;">🇮🇳</div>
+                            <div>
+                                <h3 style="margin: 0;">Telugu Resources</h3>
+                                <p style="color: #64748b; margin: 0; font-size: 0.9rem;">తెలుగులో కెరీర్ మార్గదర్శనం</p>
+                            </div>
+                        </div>
+                        <ul style="padding-left: 1.2rem; color: #475569;">
+                            <li>రెజ్యూమే తయారీ గైడ్</li>
+                            <li>ఇంటర్వ్యూ ప్రిపరేషన్ టిప్స్</li>
+                            <li>సాలరీ నెగోషియేషన్ గైడ్</li>
+                            <li>టెక్నికల్ లెర్నింగ్ రిసోర్సెస్</li>
+                        </ul>
+                        <div class="language-stats">
+                            <span style="color: #64748b;">Users: 15%</span>
+                            <button style="padding: 6px 12px; background: #f1f5f9; border: none; border-radius: 4px; cursor: pointer;">
+                                Access Resources
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i> Benefits of Multilingual Support
+                </h2>
+                
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <div class="tip-number">1</div>
+                        <div class="tip-content">
+                            <h4>Better Understanding</h4>
+                            <p>Understand job requirements and career advice in your native language, reducing confusion and misinterpretation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-number">2</div>
+                        <div class="tip-content">
+                            <h4>Increased Confidence</h4>
+                            <p>Non-English speakers gain confidence in interviews and professional communication with native language support.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-number">3</div>
+                        <div class="tip-content">
+                            <h4>Wider Reach</h4>
+                            <p>Companies can reach talented candidates from diverse linguistic backgrounds across India.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-number">4</div>
+                        <div class="tip-content">
+                            <h4>Cultural Connection</h4>
+                            <p>Build stronger connections with local companies and teams by understanding regional work culture.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="download-card" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);">
+                <div class="download-icon" style="background: #0ea5e9;">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3 style="color: #0369a1;">Multilingual Support Team</h3>
+                <p>Our team includes native speakers of Hindi, Kannada, Tamil, and Telugu to assist you with career guidance in your preferred language.</p>
+                <div style="margin: 1.5rem 0;">
+                    <div style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: white; border-radius: 8px; border: 2px solid #bae6fd; margin: 0 10px 10px 0;">
+                        <i class="fas fa-envelope" style="color: #0ea5e9;"></i>
+                        <div>
+                            <div style="font-weight: 600;">Email Support</div>
+                            <div style="color: #475569; font-size: 0.9rem;">bangalore.connect1@gmail.com</div>
+                        </div>
+                    </div>
+                    <div style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: white; border-radius: 8px; border: 2px solid #bae6fd;">
+                        <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                        <div>
+                            <div style="font-weight: 600;">WhatsApp Support</div>
+                            <div style="color: #475569; font-size: 0.9rem;">Available in 4 languages</div>
+                        </div>
+                    </div>
+                </div>
+                <p style="font-size: 0.9rem; color: #64748b;">
+                    <i class="fas fa-language"></i> Support available in: English, हिंदी, ಕನ್ನಡ, தமிழ், తెలుగు
+                </p>
+            </div>
+
+            <!-- Resource Navigation -->
+            <div class="resource-nav">
+                <a href="/ai-resources" class="resource-nav-link">
+                    <i class="fas fa-robot"></i> AI Tools
+                </a>
+                <a href="/resume-builder" class="resource-nav-link">
+                    <i class="fas fa-file-alt"></i> Resume Builder
+                </a>
+                <a href="/interview-prep" class="resource-nav-link">
+                    <i class="fas fa-comments"></i> Interview Prep
+                </a>
+            </div>
+        </div>
+    </div>
+
+ <!-- Compact Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Bangalore Connect</h3>
+                    <p style="margin-bottom: 1rem; color: var(--gray-light); font-size: 13px;">We connect the best talent with the top companies across the city to help you land your dream job faster</p>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="https://chat.whatsapp.com/KhTXl9CNMbSG8mv6nYCAAW" target="_blank" class="action-btn whatsapp-btn" style="width: 34px; height: 34px; font-size: 14px;">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="action-btn share-btn" style="width: 34px; height: 34px; font-size: 14px;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="action-btn copy-btn" style="width: 34px; height: 34px; font-size: 14px;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="/"><i class="fas fa-home"></i> Home</a>
+                        <a href="/resume-builder"><i class="fas fa-file-alt"></i> Resume Builder</a>
+                        <a href="/interview-prep"><i class="fas fa-comments"></i> Interview Prep</a>
+                        <a href="/companies"><i class="fas fa-building"></i> Companies</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <div class="footer-links">
+                        <a href="/career-guide"><i class="fas fa-chart-line"></i> Career Guide</a>
+                        <a href="/blog"><i class="fas fa-blog"></i> Tech Blog</a>
+                        <a href="/terms"><i class="fas fa-file-contract"></i> Terms</a>
+                        <a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <div class="footer-links">
+                        <% if (showAdminButton) { %>
+                            <a href="/admin"><i class="fas fa-user-cog"></i> Admin Panel</a>
+                        <% } %>
+                        <a href="#" onclick="alert('Email: support@bangaloreconnect.com')"><i class="fas fa-envelope"></i> Contact Us</a>
+                        <a href="https://chat.whatsapp.com/KhTXl9CNMbSG8mv6nYCAAW" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright" style="font-size: 12px; padding-top: 1.5rem;">
+                <span>© 2026 Bangalore Connect. All rights reserved.</span>
+                <span>Built with ❤️ by GMI Tech</span>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Language selection
+        function selectLanguage(lang) {
+            // Remove active class from all flags
+            document.querySelectorAll('.flag-icon').forEach(flag => {
+                flag.classList.remove('active');
+            });
+            
+            // Add active class to clicked flag
+            event.target.classList.add('active');
+            
+            // Update language selection
+            document.getElementById('targetLanguage').value = lang;
+            
+            // Show notification
+            showLanguageNotification(lang);
+        }
+        
+        function showLanguageNotification(lang) {
+            const languages = {
+                'en': 'English',
+                'hi': 'Hindi',
+                'kn': 'Kannada',
+                'ta': 'Tamil',
+                'te': 'Telugu'
+            };
+            
+            alert(`Language changed to ${languages[lang]}. All content will be displayed in ${languages[lang]}.`);
+        }
+        
+        // Translation demo
+        function translateText() {
+            const targetLang = document.getElementById('targetLanguage').value;
+            const originalText = document.getElementById('originalText').textContent;
+            
+            // Demo translations (in real app, use Google Translate API)
+            const translations = {
+                'hi': 'हम 3+ वर्षों के अनुभव वाले एक प्रतिभाशाली सॉफ्टवेयर इंजीनियर की तलाश कर रहे हैं जिसे फुल-स्टैक डेवलपमेंट में अनुभव हो। आदर्श उम्मीदवार के पास React.js, Node.js, और MongoDB में मजबूत कौशल होने चाहिए। आप स्केलेबल वेब एप्लिकेशन डिजाइन, विकसित और बनाए रखने के लिए जिम्मेदार होंगे। यह पद प्रतिस्पर्धी वेतन, स्वास्थ्य बीमा, लचीले काम के घंटे और करियर विकास के अवसर प्रदान करता है।',
+                'kn': 'ನಮಗೆ 3+ ವರ್ಷಗಳ ಅನುಭವ ಹೊಂದಿರುವ ಪ್ರತಿಭಾವಾನ್ ಸಾಫ್ಟ್ವೇರ್ ಇಂಜಿನಿಯರ್ ಅಗತ್ಯವಿದೆ, ಪೂರ್ಣ-ಸ್ಟ್ಯಾಕ್ ಅಭಿವೃದ್ಧಿಯಲ್ಲಿ ಅನುಭವ ಹೊಂದಿರಬೇಕು. ಆದರ್ಶ ಅಭ್ಯರ್ಥಿಗೆ React.js, Node.js, ಮತ್ತು MongoDB ನಲ್ಲಿ ಪ್ರಬಲ ಕೌಶಲ್ಯಗಳು ಇರಬೇಕು. ನೀವು ಸ್ಕೇಲಬಲ್ ವೆಬ್ ಅಪ್ಲಿಕೇಶನ್ಗಳನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸಲು, ಅಭಿವೃದ್ಧಿಪಡಿಸಲು ಮತ್ತು ನಿರ್ವಹಿಸಲು ಜವಾಬ್ದಾರರಾಗಿರುತ್ತೀರಿ. ಈ ಹುದ್ದೆಯು ಸ್ಪರ್ಧಾತ್ಮಕ ಸಂಬಳ, ಆರೋಗ್ಯ ವಿಮಾ, ಹೊಂದಿಕೊಳ್ಳುವ ಕೆಲಸದ ಗಂಟೆಗಳು ಮತ್ತು ವೃತ್ತಿ ಬೆಳವಣಿಗೆಯ ಅವಕಾಶಗಳನ್ನು ನೀಡುತ್ತದೆ.',
+                'ta': '3+ ஆண்டுகள் முழு-ஸ்டேக் உருவாக்கத்தில் அனுபவம் உள்ள ஒரு திறமையான மென்பொருள் பொறியாளரை நாங்கள் தேடுகிறோம். இலக்கு வேட்பாளருக்கு React.js, Node.js மற்றும் MongoDB ஆகியவற்றில் வலுவான திறன்கள் இருக்க வேண்டும். அளவிடக்கூடிய வலைப் பயன்பாடுகளை வடிவமைக்கவும், உருவாக்கவும், பராமரிக்கவும் நீங்கள் பொறுப்பு வகிப்பீர்கள். இந்தப் பதவி போட்டித்தன்மையான சம்பளம், சுகாதார காப்பீடு, நெகிழ்வான பணி நேரங்கள் மற்றும் தொழில் வளர்ச்சி வாய்ப்புகளை வழங்குகிறது.',
+                'te': 'మాకు 3+ సంవత్సరాల అనుభవం కలిగిన ఒక ప్రతిభావంతులైన సాఫ్ట్‌వేర్ ఇంజనీర్ అవసరం, ఫుల్-స్టాక్ డెవలప్‌మెంట్‌లో అనుభవం ఉండాలి. ఆదర్శ అభ్యర్థికి React.js, Node.js మరియు MongoDBలో బలమైన నైపుణ్యాలు ఉండాలి. మీరు స్కేలబుల్ వెబ్ అప్లికేషన్‌లను రూపకల్పన చేయడం, అభివృద్ధి చేయడం మరియు నిర్వహించడం బాధ్యత వహిస్తారు. ఈ స్థానం పోటీతత్వ జీతం, ఆరోగ్య బీమా, సర్దుబాటు చేయగల పని గంటలు మరియు కెరీర్ వృద్ధి అవకాశాలను అందిస్తుంది.'
+            };
+            
+            document.getElementById('translatedText').textContent = translations[targetLang] || 'Translation not available for this language.';
+        }
+        
+        function speakText() {
+            const text = document.getElementById('translatedText').textContent;
+            if ('speechSynthesis' in window && text) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = document.getElementById('targetLanguage').value;
+                speechSynthesis.speak(utterance);
+            } else {
+                alert('Text-to-speech not supported or no text to speak.');
+            }
+        }
+        
+        function copyTranslation() {
+            const text = document.getElementById('translatedText').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Translation copied to clipboard!');
+            });
+        }
+        
+        // Initialize with Hindi translation
+        document.addEventListener('DOMContentLoaded', function() {
+            translateText();
+        });
+    </script>
+</body>
+</html>

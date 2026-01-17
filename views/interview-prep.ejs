@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Preparation - Bangalore Connect</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Interview Preparation</h1>
+                        <span>Bangalore Connect Resources</span>
+                    </div>
+                </a>
+                <div class="header-actions">
+                    <a href="https://chat.whatsapp.com/KhTXl9CNMbSG8mv6nYCAAW" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-whatsapp"></i> Join Community
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="resource-container">
+            <!-- Header -->
+            <div class="resource-header">
+                <h1>Ace Your Next Interview</h1>
+                <p>Prepare for success with our comprehensive guide to common interview questions for IT, Non-IT, and HR rounds.</p>
+            </div>
+
+            <!-- IT Interview Questions -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-laptop-code"></i> Top 10 IT Interview Questions
+                </h2>
+                
+                <div class="questions-list">
+                    <% const itQuestions = [
+                        {
+                            q: "Explain the difference between SQL and NoSQL databases.",
+                            a: "SQL databases are relational, table-based, and use structured query language. NoSQL databases are non-relational, document/key-value/graph based, and offer more flexibility for unstructured data."
+                        },
+                        {
+                            q: "What is REST API and how does it work?",
+                            a: "REST (Representational State Transfer) is an architectural style for designing networked applications. It uses HTTP methods (GET, POST, PUT, DELETE) and stateless communication between client and server."
+                        },
+                        {
+                            q: "Explain Object-Oriented Programming principles.",
+                            a: "OOP principles include: 1) Encapsulation (bundling data and methods), 2) Inheritance (class hierarchy), 3) Polymorphism (same interface, different implementation), 4) Abstraction (hiding complex details)."
+                        },
+                        {
+                            q: "What is the difference between HTTP and HTTPS?",
+                            a: "HTTP is unsecured while HTTPS uses SSL/TLS encryption. HTTPS provides data integrity, encryption, and authentication, making it secure for sensitive transactions."
+                        },
+                        {
+                            q: "Explain Agile methodology.",
+                            a: "Agile is an iterative approach to project management focusing on continuous delivery, collaboration, and flexibility. Key frameworks include Scrum and Kanban."
+                        },
+                        {
+                            q: "What are microservices?",
+                            a: "Microservices architecture breaks applications into small, independent services that communicate via APIs. Each service focuses on a specific business capability."
+                        },
+                        {
+                            q: "Explain CI/CD pipeline.",
+                            a: "CI (Continuous Integration) involves regularly merging code changes. CD (Continuous Delivery/Deployment) automatically deploys tested code to production."
+                        },
+                        {
+                            q: "What is Docker and how is it different from virtual machines?",
+                            a: "Docker uses containerization to package applications with dependencies. Unlike VMs, containers share the host OS kernel, making them lighter and faster."
+                        },
+                        {
+                            q: "Explain the difference between var, let, and const in JavaScript.",
+                            a: "var is function-scoped, let is block-scoped, and const is block-scoped but immutable. var can be redeclared, while let and const cannot in the same scope."
+                        },
+                        {
+                            q: "What is responsive web design?",
+                            a: "Responsive design ensures websites work on all devices by using flexible grids, media queries, and responsive images to adapt to different screen sizes."
+                        }
+                    ]; %>
+                    
+                    <% itQuestions.forEach((question, index) => { %>
+                    <div class="question-item">
+                        <div class="question-header">
+                            <div class="question-icon">
+                                <%= index + 1 %>
+                            </div>
+                            <h4><%= question.q %></h4>
+                        </div>
+                        <div class="answer-content">
+                            <p><%= question.a %></p>
+                        </div>
+                    </div>
+                    <% }); %>
+                </div>
+            </div>
+
+            <!-- Non-IT Interview Questions -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-briefcase"></i> Top 10 Non-IT Interview Questions
+                </h2>
+                
+                <div class="questions-list">
+                    <% const nonItQuestions = [
+                        {
+                            q: "Why do you want to work in this industry?",
+                            a: "Show passion and knowledge about the industry. Mention trends, challenges, and how your skills align with industry needs."
+                        },
+                        {
+                            q: "How do you handle multiple priorities and deadlines?",
+                            a: "Discuss prioritization methods, time management tools, communication with stakeholders, and giving realistic timelines."
+                        },
+                        {
+                            q: "Describe a challenging work situation and how you overcame it.",
+                            a: "Use STAR method: Situation, Task, Action, Result. Focus on problem-solving and positive outcomes."
+                        },
+                        {
+                            q: "What are your salary expectations?",
+                            a: "Research market rates, give a range based on experience, and mention being flexible based on the total compensation package."
+                        },
+                        {
+                            q: "Where do you see yourself in 5 years?",
+                            a: "Show ambition aligned with company growth, mention skill development goals, and how you plan to contribute to the organization."
+                        },
+                        {
+                            q: "Why should we hire you?",
+                            a: "Summarize key skills, experience, and achievements that match the job requirements. Show enthusiasm and cultural fit."
+                        },
+                        {
+                            q: "How do you handle constructive criticism?",
+                            a: "Emphasize willingness to learn, giving examples of feedback you implemented, and how it improved your work."
+                        },
+                        {
+                            q: "What motivates you at work?",
+                            a: "Mention challenging projects, learning opportunities, teamwork, achieving results, and making an impact."
+                        },
+                        {
+                            q: "How do you build relationships with colleagues?",
+                            a: "Discuss communication skills, collaboration, empathy, respect for diversity, and team-building activities."
+                        },
+                        {
+                            q: "What are your strengths and weaknesses?",
+                            a: "Strengths should match job requirements. For weaknesses, mention real areas for improvement and steps you're taking to address them."
+                        }
+                    ]; %>
+                    
+                    <% nonItQuestions.forEach((question, index) => { %>
+                    <div class="question-item">
+                        <div class="question-header">
+                            <div class="question-icon">
+                                <%= index + 1 %>
+                            </div>
+                            <h4><%= question.q %></h4>
+                        </div>
+                        <div class="answer-content">
+                            <p><%= question.a %></p>
+                        </div>
+                    </div>
+                    <% }); %>
+                </div>
+            </div>
+
+            <!-- HR Interview Questions -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-users"></i> Top 10 HR Interview Questions
+                </h2>
+                
+                <div class="questions-list">
+                    <% const hrQuestions = [
+                        {
+                            q: "Tell me about yourself.",
+                            a: "Give a 2-minute professional summary: current role, key achievements, relevant skills, and why you're interested in this position."
+                        },
+                        {
+                            q: "Why do you want to leave your current job?",
+                            a: "Focus on positive reasons: career growth, new challenges, skill development. Never criticize current employer."
+                        },
+                        {
+                            q: "What do you know about our company?",
+                            a: "Research company values, products/services, recent news, market position, and culture. Show genuine interest."
+                        },
+                        {
+                            q: "What are your career goals?",
+                            a: "Align personal goals with company objectives. Mention skill development, contributions you want to make, and growth within the company."
+                        },
+                        {
+                            q: "How do you handle work pressure?",
+                            a: "Discuss stress management techniques, prioritization, breaking tasks into smaller parts, and maintaining work-life balance."
+                        },
+                        {
+                            q: "Describe your ideal work environment.",
+                            a: "Mention aspects that help you perform best: collaborative teams, learning opportunities, clear goals, supportive management."
+                        },
+                        {
+                            q: "What is your leadership style?",
+                            a: "Describe your approach: democratic, coaching, visionary, etc. Give examples of leading teams or projects successfully."
+                        },
+                        {
+                            q: "How do you contribute to team success?",
+                            a: "Discuss collaboration, sharing knowledge, supporting colleagues, communication, and putting team goals before individual ones."
+                        },
+                        {
+                            q: "What is your greatest professional achievement?",
+                            a: "Choose a relevant achievement, explain the challenge, your actions, and quantifiable results. Use numbers when possible."
+                        },
+                        {
+                            q: "Do you have any questions for us?",
+                            a: "Ask about team dynamics, performance expectations, training opportunities, company culture, and growth paths."
+                        }
+                    ]; %>
+                    
+                    <% hrQuestions.forEach((question, index) => { %>
+                    <div class="question-item">
+                        <div class="question-header">
+                            <div class="question-icon">
+                                <%= index + 1 %>
+                            </div>
+                            <h4><%= question.q %></h4>
+                        </div>
+                        <div class="answer-content">
+                            <p><%= question.a %></p>
+                        </div>
+                    </div>
+                    <% }); %>
+                </div>
+            </div>
+
+            <!-- Interview Tips -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-trophy"></i> Interview Success Tips
+                </h2>
+                
+                <div class="guide-section">
+                    <h3><i class="fas fa-check-circle"></i> Preparation Checklist</h3>
+                    <ul>
+                        <li>Research the company thoroughly</li>
+                        <li>Review the job description and match your skills</li>
+                        <li>Prepare 5-6 questions to ask the interviewer</li>
+                        <li>Practice common questions with the STAR method</li>
+                        <li>Dress professionally for the company culture</li>
+                        <li>Test your tech setup for virtual interviews</li>
+                        <li>Prepare your portfolio/work samples</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-section">
+                    <h3><i class="fas fa-video"></i> Virtual Interview Tips</h3>
+                    <ul>
+                        <li>Test camera, microphone, and internet connection</li>
+                        <li>Choose a professional, quiet background</li>
+                        <li>Look at the camera, not the screen</li>
+                        <li>Have notes ready but don't read from them</li>
+                        <li>Join 5-10 minutes early</li>
+                        <li>Ensure good lighting on your face</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Resource Navigation -->
+            <div class="resource-nav">
+                <a href="/resume-builder" class="resource-nav-link">
+                    <i class="fas fa-file-alt"></i> Resume Builder
+                </a>
+                <a href="/companies" class="resource-nav-link">
+                    <i class="fas fa-building"></i> Top Companies
+                </a>
+                <a href="/career-guide" class="resource-nav-link">
+                    <i class="fas fa-chart-line"></i> Career Guide
+                </a>
+            </div>
+        </div>
+    </div>
+
+     <!-- Compact Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Bangalore Connect</h3>
+                    <p style="margin-bottom: 1rem; color: var(--gray-light); font-size: 13px;">We connect the best talent with the top companies across the city to help you land your dream job faster</p>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="https://chat.whatsapp.com/KhTXl9CNMbSG8mv6nYCAAW" target="_blank" class="action-btn whatsapp-btn" style="width: 34px; height: 34px; font-size: 14px;">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="action-btn share-btn" style="width: 34px; height: 34px; font-size: 14px;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="action-btn copy-btn" style="width: 34px; height: 34px; font-size: 14px;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="/"><i class="fas fa-home"></i> Home</a>
+                        <a href="/resume-builder"><i class="fas fa-file-alt"></i> Resume Builder</a>
+                        <a href="/interview-prep"><i class="fas fa-comments"></i> Interview Prep</a>
+                        <a href="/companies"><i class="fas fa-building"></i> Companies</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <div class="footer-links">
+                        <a href="/career-guide"><i class="fas fa-chart-line"></i> Career Guide</a>
+                        <a href="/blog"><i class="fas fa-blog"></i> Tech Blog</a>
+                        <a href="/terms"><i class="fas fa-file-contract"></i> Terms</a>
+                        <a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <div class="footer-links">
+                        <% if (showAdminButton) { %>
+                            <a href="/admin"><i class="fas fa-user-cog"></i> Admin Panel</a>
+                        <% } %>
+                        <a href="#" onclick="alert('Email: support@bangaloreconnect.com')"><i class="fas fa-envelope"></i> Contact Us</a>
+                        <a href="https://chat.whatsapp.com/KhTXl9CNMbSG8mv6nYCAAW" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright" style="font-size: 12px; padding-top: 1.5rem;">
+                <span>© 2026 Bangalore Connect. All rights reserved.</span>
+                <span>Built with ❤️ by GMI Tech</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

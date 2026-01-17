@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Companies - Bangalore Connect</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Top Companies</h1>
+                        <span>Bangalore Connect Resources</span>
+                    </div>
+                </a>
+                <div class="header-actions">
+                    <a href="https://chat.whatsapp.com/KhTXl9CNMbSG8mv6nYCAAW" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-whatsapp"></i> Join Community
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="resource-container">
+            <!-- Header -->
+            <div class="resource-header">
+                <h1>Top 50 Startups & Companies in Bangalore</h1>
+                <p>Explore the most innovative and fast-growing companies in India's tech capital. These companies are hiring actively and offer exciting career opportunities.</p>
+            </div>
+
+            <!-- Companies List -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-rocket"></i> Top 50 Startups & Tech Companies
+                </h2>
+                
+                <div class="companies-grid">
+                    <% const companies = [
+                        { name: "Flipkart", category: "E-commerce" },
+                        { name: "Swiggy", category: "Food Delivery" },
+                        { name: "Zomato", category: "Food Tech" },
+                        { name: "BYJU'S", category: "EdTech" },
+                        { name: "Ola", category: "Mobility" },
+                        { name: "Ola Electric", category: "EV" },
+                        { name: "Razorpay", category: "FinTech" },
+                        { name: "CRED", category: "FinTech" },
+                        { name: "Pharmeasy", category: "HealthTech" },
+                        { name: "Unacademy", category: "EdTech" },
+                        { name: "UpGrad", category: "EdTech" },
+                        { name: "Dream11", category: "Gaming" },
+                        { name: "Freshworks", category: "SaaS" },
+                        { name: "Chargebee", category: "SaaS" },
+                        { name: "BrowserStack", category: "Testing" },
+                        { name: "Postman", category: "API Platform" },
+                        { name: "Hike", category: "Social" },
+                        { name: "PhonePe", category: "FinTech" },
+                        { name: "Meesho", category: "Social Commerce" },
+                        { name: "Innovaccer", category: "HealthTech" },
+                        { name: "Delhivery", category: "Logistics" },
+                        { name: "BlackBuck", category: "Logistics" },
+                        { name: "ShareChat", category: "Social Media" },
+                        { name: "Livspace", category: "Home Interiors" },
+                        { name: "Cure.fit", category: "Health & Fitness" },
+                        { name: "Licious", category: "Food Tech" },
+                        { name: "Dunzo", category: "Hyperlocal" },
+                        { name: "Rupeek", category: "FinTech" },
+                        { name: "Ather Energy", category: "EV" },
+                        { name: "Zetwerk", category: "Manufacturing" },
+                        { name: "Digit Insurance", category: "InsurTech" },
+                        { name: "NoBroker", category: "PropTech" },
+                        { name: "Pristyn Care", category: "HealthTech" },
+                        { name: "Moglix", category: "B2B Commerce" },
+                        { name: "Infra.Market", category: "Construction" },
+                        { name: "DealShare", category: "Social Commerce" },
+                        { name: "MPL", category: "Gaming" },
+                        { name: "Cashfree", category: "FinTech" },
+                        { name: "MindTickle", category: "SaaS" },
+                        { name: "Whatfix", category: "SaaS" },
+                        { name: "BharatPe", category: "FinTech" },
+                        { name: "Groww", category: "FinTech" },
+                        { name: "Smallcase", category: "FinTech" },
+                        { name: "Scripbox", category: "FinTech" },
+                        { name: "Ninjacart", category: "AgriTech" },
+                        { name: "Jumbotail", category: "B2B Food" },
+                        { name: "Cars24", category: "Auto Tech" },
+                        { name: "Spinny", category: "Auto Tech" },
+                        { name: "MediBuddy", category: "HealthTech" },
+                        { name: "Porter", category: "Logistics" }
+                    ]; %>
+                    
+                    <% companies.forEach((company, index) => { %>
+                    <div class="company-card">
+                        <div class="company-logo">
+                            <%= company.name.charAt(0) %>
+                        </div>
+                        <h4><%= company.name %></h4>
+                        <p><%= company.category %></p>
+                    </div>
+                    <% }); %>
+                </div>
+            </div>
+
+            <!-- Company Categories -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-pie"></i> Company Categories
+                </h2>
+                
+                <div class="resource-cards">
+                    <div class="resource-card">
+                        <div class="resource-card-icon" style="background: #3b82f6; color: white;">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3>FinTech</h3>
+                        <p>Leading companies in digital payments, lending, insurance, and investment platforms. Fastest growing sector with high salaries.</p>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-card-icon" style="background: #10b981; color: white;">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>HealthTech</h3>
+                        <p>Innovative startups in telemedicine, diagnostics, healthcare delivery, and wellness. Post-pandemic growth sector.</p>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-card-icon" style="background: #f59e0b; color: white;">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>EdTech</h3>
+                        <p>Online learning platforms, upskilling courses, and educational content providers. Revolutionizing education in India.</p>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-card-icon" style="background: #ef4444; color: white;">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>Logistics & Supply Chain</h3>
+                        <p>Tech companies optimizing delivery, warehousing, and supply chain management. Critical for e-commerce growth.</p>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-card-icon" style="background: #8b5cf6; color: white;">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h3>SaaS</h3>
+                        <p>Software-as-a-Service companies building global products from India. High valuation businesses with global customers.</p>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-card-icon" style="background: #ec4899; color: white;">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>E-commerce & Retail</h3>
+                        <p>From marketplaces to D2C brands, these companies are transforming how India shops and sells products.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hiring Tips -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-bullseye"></i> How to Get Hired at Top Startups
+                </h2>
+                
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <div class="tip-number">1</div>
+                        <div class="tip-content">
+                            <h4>Build a Strong Portfolio</h4>
+                            <p>Startups value practical skills. Have GitHub projects, case studies, or a personal website showcasing your work.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-number">2</div>
+                        <div class="tip-content">
+                            <h4>Network Actively</h4>
+                            <p>Attend startup events, connect with employees on LinkedIn, and join relevant communities to get referrals.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-number">3</div>
+                        <div class="tip-content">
+                            <h4>Understand the Business</h4>
+                            <p>Research the company's products, competitors, and business model. Show how you can contribute to their growth.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-number">4</div>
+                        <div class="tip-content">
+                            <h4>Show Problem-Solving Skills</h4>
+                            <p>Startups look for people who can solve problems independently. Prepare examples of challenges you've overcome.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-number">5</div>
+                        <div class="tip-content">
+                            <h4>Demonstrate Cultural Fit</h4>
+                            <p>Show enthusiasm for the startup's mission and willingness to work in fast-paced, ambiguous environments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resource Navigation -->
+            <div class="resource-nav">
+                <a href="/resume-builder" class="resource-nav-link">
+                    <i class="fas fa-file-alt"></i> Resume Builder
+                </a>
+                <a href="/interview-prep" class="resource-nav-link">
+                    <i class="fas fa-comments"></i> Interview Prep
+                </a>
+                <a href="/career-guide" class="resource-nav-link">
+                    <i class="fas fa-chart-line"></i> Career Guide
+                </a>
+            </div>
+        </div>
+    </div>
+
+     <!-- Compact Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Bangalore Connect</h3>
+                    <p style="margin-bottom: 1rem; color: var(--gray-light); font-size: 13px;">We connect the best talent with the top companies across the city to help you land your dream job faster</p>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="https://chat.whatsapp.com/KhTXl9CNMbSG8mv6nYCAAW" target="_blank" class="action-btn whatsapp-btn" style="width: 34px; height: 34px; font-size: 14px;">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="action-btn share-btn" style="width: 34px; height: 34px; font-size: 14px;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="action-btn copy-btn" style="width: 34px; height: 34px; font-size: 14px;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="/"><i class="fas fa-home"></i> Home</a>
+                        <a href="/resume-builder"><i class="fas fa-file-alt"></i> Resume Builder</a>
+                        <a href="/interview-prep"><i class="fas fa-comments"></i> Interview Prep</a>
+                        <a href="/companies"><i class="fas fa-building"></i> Companies</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <div class="footer-links">
+                        <a href="/career-guide"><i class="fas fa-chart-line"></i> Career Guide</a>
+                        <a href="/blog"><i class="fas fa-blog"></i> Tech Blog</a>
+                        <a href="/terms"><i class="fas fa-file-contract"></i> Terms</a>
+                        <a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <div class="footer-links">
+                        <% if (showAdminButton) { %>
+                            <a href="/admin"><i class="fas fa-user-cog"></i> Admin Panel</a>
+                        <% } %>
+                        <a href="#" onclick="alert('Email: support@bangaloreconnect.com')"><i class="fas fa-envelope"></i> Contact Us</a>
+                        <a href="https://chat.whatsapp.com/KhTXl9CNMbSG8mv6nYCAAW" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright" style="font-size: 12px; padding-top: 1.5rem;">
+                <span>© 2026 Bangalore Connect. All rights reserved.</span>
+                <span>Built with ❤️ by GMI Tech</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

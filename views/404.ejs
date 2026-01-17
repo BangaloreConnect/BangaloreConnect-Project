@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Bangalore Connect</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 404 Page Specific Styles */
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+        }
+        
+        .error-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .error-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        }
+        
+        .error-icon {
+            font-size: 5rem;
+            color: #3b82f6;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .error-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        
+        .error-subtitle {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .error-message {
+            color: #64748b;
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-404 {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-404-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+        
+        .btn-404-primary:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-404-secondary {
+            background: #f8fafc;
+            color: #475569;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .btn-404-secondary:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .error-footer {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+        
+        .error-footer a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        
+        .error-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .error-animation {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 50%;
+            animation: move 20s linear infinite;
+        }
+        
+        .error-animation:nth-child(1) {
+            top: -50px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+        
+        .error-animation:nth-child(2) {
+            bottom: -50px;
+            right: -50px;
+            animation-delay: -5s;
+        }
+        
+        @keyframes move {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(100px, 100px) rotate(360deg); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 640px) {
+            .error-card {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .error-title {
+                font-size: 2.5rem;
+            }
+            
+            .error-subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+            }
+            
+            .btn-404 {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .error-page {
+                padding: 1rem;
+            }
+            
+            .error-card {
+                padding: 1.5rem;
+            }
+            
+            .error-icon {
+                font-size: 3.5rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-page">
+        <!-- Background animations -->
+        <div class="error-animation"></div>
+        <div class="error-animation"></div>
+        
+        <div class="error-card">
+            <div class="error-icon">
+                <i class="fas fa-compass"></i>
+            </div>
+            
+            <h1 class="error-title">404</h1>
+            
+            <h2 class="error-subtitle">Page Not Found</h2>
+            
+            <p class="error-message">
+                Oops! It seems like the page you're looking for has taken a detour. 
+                Don't worry, let's get you back on track!
+            </p>
+            
+            <div class="error-actions">
+                <a href="/" class="btn-404 btn-404-primary">
+                    <i class="fas fa-home"></i> Home Page
+                </a>
+                <button onclick="history.back()" class="btn-404 btn-404-secondary">
+                    <i class="fas fa-arrow-left"></i> Go Back
+                </button>
+            </div>
+            
+            <div class="error-footer">
+                <p>
+                    Need help? <a href="mailto:bangalore.connect1@gmail.com">Contact Support</a> • 
+                    <a href="/">Browse Jobs</a>
+                </p>
+                <p style="margin-top: 0.5rem; font-size: 0.75rem;">
+                    <i class="fas fa-info-circle"></i> Error 404 • Bangalore Connect Portal
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click animation to buttons
+            const buttons = document.querySelectorAll('.btn-404');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+            
+            // Add floating animation to icon
+            const icon = document.querySelector('.error-icon');
+            setInterval(() => {
+                icon.style.filter = 'hue-rotate(' + Math.random() * 360 + 'deg)';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

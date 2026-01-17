@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Tools - Bangalore Connect</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <style>
+        /* AI-specific styles */
+        .ai-tool-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .ai-tool-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .ai-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        
+        .ai-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .ai-feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ai-demo-box {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .ai-score {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #3b82f6;
+            margin: 1rem 0;
+        }
+        
+        .match-bar {
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .match-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+        
+        .language-selector {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+        
+        .lang-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .lang-btn:hover {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        
+        .lang-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        
+        @media (max-width: 768px) {
+            .ai-feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-tool-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>AI Career Tools</h1>
+                        <span>Bangalore Connect Resources</span>
+                    </div>
+                </a>
+                <div class="header-actions">
+                    <a href="https://chat.whatsapp.com/KhTXl9CNMbSG8mv6nYCAAW" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-whatsapp"></i> Join Community
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="resource-container">
+            <!-- Header -->
+            <div class="resource-header">
+                <h1>AI-Powered Career Assistant</h1>
+                <p>Leverage artificial intelligence to optimize your job search, improve your resume, and accelerate your career growth.</p>
+            </div>
+
+            <!-- AI Introduction -->
+            <div class="ai-tool-card">
+                <div class="ai-tool-header">
+                    <div class="ai-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <h2 style="color: white; margin: 0;">Smart Career AI</h2>
+                        <p style="color: rgba(255, 255, 255, 0.9); margin: 0.5rem 0 0;">Powered by advanced algorithms to help you succeed</p>
+                    </div>
+                </div>
+                <p style="color: rgba(255, 255, 255, 0.9);">Our AI tools analyze job descriptions, your skills, and market trends to provide personalized recommendations and insights for your career growth.</p>
+            </div>
+
+            <!-- AI Features Grid -->
+            <div class="ai-feature-grid">
+                <div class="ai-feature-card">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                        <div style="width: 48px; height: 48px; background: #dbeafe; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #1e40af;">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3 style="margin: 0;">Resume Scoring</h3>
+                    </div>
+                    <p>Get instant feedback on your resume with AI-powered analysis of content, formatting, and ATS compatibility.</p>
+                    <div class="ai-demo-box">
+                        <div class="ai-score">87%</div>
+                        <p>ATS Compatibility Score</p>
+                        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                            <span>Content: 92%</span>
+                            <span>Format: 85%</span>
+                            <span>Keywords: 78%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ai-feature-card">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                        <div style="width: 48px; height: 48px; background: #d1fae5; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #065f46;">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <h3 style="margin: 0;">Job Match Score</h3>
+                    </div>
+                    <p>See how well your profile matches specific job requirements with detailed breakdown by skills and experience.</p>
+                    <div class="ai-demo-box">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Match Score</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="match-bar">
+                            <div class="match-fill" style="width: 92%;"></div>
+                        </div>
+                        <div style="margin-top: 1rem; text-align: left;">
+                            <div>Skills Match: 95%</div>
+                            <div>Experience Match: 90%</div>
+                            <div>Culture Fit: 88%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ai-feature-card">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                        <div style="width: 48px; height: 48px; background: #fef3c7; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #92400e;">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 style="margin: 0;">Interview Generator</h3>
+                    </div>
+                    <p>Generate personalized interview questions based on job descriptions and your specific background.</p>
+                    <div class="ai-demo-box">
+                        <h4 style="margin-bottom: 1rem;">Generated Questions:</h4>
+                        <div style="text-align: left;">
+                            <p>1. "Describe your experience with cloud architecture..."</p>
+                            <p>2. "How would you handle scalability issues..."</p>
+                            <p>3. "Explain your approach to system design..."</p>
+                        </div>
+                        <button style="margin-top: 1rem; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                            Generate More
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Salary Prediction -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-money-bill-wave"></i> AI Salary Predictor
+                </h2>
+                
+                <div class="guide-section">
+                    <h3><i class="fas fa-calculator"></i> Estimate Your Market Value</h3>
+                    <p>Enter your details to get AI-powered salary predictions based on current market trends in Bangalore:</p>
+                    
+                    <div style="background: white; border-radius: 12px; padding: 2rem; margin: 1.5rem 0; border: 1px solid #e2e8f0;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Experience Level</label>
+                                <select style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                                    <option value="fresher">Fresher (0-2 years)</option>
+                                    <option value="mid">Mid-Level (3-7 years)</option>
+                                    <option value="senior">Senior (8+ years)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Primary Skills</label>
+                                <input type="text" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;" placeholder="e.g., React, Node.js, AWS">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Current Salary (₹)</label>
+                                <input type="number" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;" placeholder="e.g., 800000">
+                            </div>
+                        </div>
+                        
+                        <button onclick="predictSalary()" style="padding: 12px 24px; background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            <i class="fas fa-chart-line"></i> Predict Market Salary
+                        </button>
+                        
+                        <div id="salaryResult" style="display: none; margin-top: 2rem; padding: 1.5rem; background: #f0f9ff; border-radius: 8px; border-left: 4px solid #0ea5e9;">
+                            <h3 style="margin-bottom: 1rem; color: #0369a1;">Predicted Salary Range</h3>
+                            <div class="ai-score" style="color: #059669;">₹12,50,000 - ₹15,00,000</div>
+                            <p style="color: #475569; margin-top: 1rem;">Based on similar profiles in Bangalore with your skills and experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Recommendations -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-lightbulb"></i> AI Career Recommendations
+                </h2>
+                
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <div class="tip-number">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="tip-content">
+                            <h4>Personalized Learning Path</h4>
+                            <p>Based on your career goals and skill gaps, our AI recommends specific courses, projects, and certifications to pursue.</p>
+                            <div style="margin-top: 0.5rem; padding: 0.75rem; background: #f8fafc; border-radius: 6px;">
+                                <strong>Suggested:</strong> AWS Certified Solutions Architect, Advanced React Patterns, System Design Course
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-number">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="tip-content">
+                            <h4>Smart Job Recommendations</h4>
+                            <p>Receive daily job recommendations based on your profile, application history, and companies you've shown interest in.</p>
+                            <div style="margin-top: 0.5rem; padding: 0.75rem; background: #f8fafc; border-radius: 6px;">
+                                <strong>Today's Picks:</strong> Senior Backend Engineer at Razorpay, Full Stack Developer at Postman
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-number">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="tip-content">
+                            <h4>Career Growth Predictions</h4>
+                            <p>AI analyzes career paths of professionals with similar backgrounds to suggest optimal moves for your growth.</p>
+                            <div style="margin-top: 0.5rem; padding: 0.75rem; background: #f8fafc; border-radius: 6px;">
+                                <strong>Path Analysis:</strong> 85% of professionals with your skills reached senior roles within 4 years
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="download-card" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);">
+                <div class="download-icon" style="background: #0ea5e9;">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3 style="color: #0369a1;">Need Help with AI Tools?</h3>
+                <p>Contact our AI career specialists for personalized guidance on using these tools effectively.</p>
+                <div style="margin: 1.5rem 0;">
+                    <div style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: white; border-radius: 8px; border: 2px solid #bae6fd;">
+                        <i class="fas fa-envelope" style="color: #0ea5e9;"></i>
+                        <div>
+                            <div style="font-weight: 600;">Email Support</div>
+                            <div style="color: #475569; font-size: 0.9rem;">bangalore.connect1@gmail.com</div>
+                        </div>
+                    </div>
+                </div>
+                <p style="font-size: 0.9rem; color: #64748b;">
+                    <i class="fas fa-clock"></i> Response time: Within 24 hours
+                </p>
+            </div>
+
+            <!-- Resource Navigation -->
+            <div class="resource-nav">
+                <a href="/resume-builder" class="resource-nav-link">
+                    <i class="fas fa-file-alt"></i> Resume Builder
+                </a>
+                <a href="/interview-prep" class="resource-nav-link">
+                    <i class="fas fa-comments"></i> Interview Prep
+                </a>
+                <a href="/multilingual" class="resource-nav-link">
+                    <i class="fas fa-language"></i> Multilingual
+                </a>
+            </div>
+        </div>
+    </div>
+
+  <!-- Compact Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Bangalore Connect</h3>
+                    <p style="margin-bottom: 1rem; color: var(--gray-light); font-size: 13px;">We connect the best talent with the top companies across the city to help you land your dream job faster</p>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="https://chat.whatsapp.com/KhTXl9CNMbSG8mv6nYCAAW" target="_blank" class="action-btn whatsapp-btn" style="width: 34px; height: 34px; font-size: 14px;">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="action-btn share-btn" style="width: 34px; height: 34px; font-size: 14px;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="action-btn copy-btn" style="width: 34px; height: 34px; font-size: 14px;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="/"><i class="fas fa-home"></i> Home</a>
+                        <a href="/resume-builder"><i class="fas fa-file-alt"></i> Resume Builder</a>
+                        <a href="/interview-prep"><i class="fas fa-comments"></i> Interview Prep</a>
+                        <a href="/companies"><i class="fas fa-building"></i> Companies</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <div class="footer-links">
+                        <a href="/career-guide"><i class="fas fa-chart-line"></i> Career Guide</a>
+                        <a href="/blog"><i class="fas fa-blog"></i> Tech Blog</a>
+                        <a href="/terms"><i class="fas fa-file-contract"></i> Terms</a>
+                        <a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <div class="footer-links">
+                        <% if (showAdminButton) { %>
+                            <a href="/admin"><i class="fas fa-user-cog"></i> Admin Panel</a>
+                        <% } %>
+                        <a href="#" onclick="alert('Email: support@bangaloreconnect.com')"><i class="fas fa-envelope"></i> Contact Us</a>
+                        <a href="https://chat.whatsapp.com/KhTXl9CNMbSG8mv6nYCAAW" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright" style="font-size: 12px; padding-top: 1.5rem;">
+                <span>© 2026 Bangalore Connect. All rights reserved.</span>
+                <span>Built with ❤️ by GMI Tech</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function predictSalary() {
+            document.getElementById('salaryResult').style.display = 'block';
+            document.getElementById('salaryResult').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Demo match score animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const matchFill = document.querySelector('.match-fill');
+            if (matchFill) {
+                matchFill.style.width = '0%';
+                setTimeout(() => {
+                    matchFill.style.width = '92%';
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>
